@@ -1,0 +1,33 @@
+---
+title: "Mahoning County Wages"
+output: html_document
+---
+
+```{r loading, warning=FALSE, message=FALSE, echo=FALSE}
+
+#loading necessary packages
+library(tidyverse)
+
+#loading the payroll data
+wages <- read_csv("output_data/2017wages_all.csv")
+
+#narrowing the selection
+wages <- wages %>% 
+  mutate(name=paste(last_name, first_name, sep=", "))
+
+wages_simple <- select(wages, name, department, base_pay, total_ot)
+
+```
+
+Browse the Mahoning County 2017 payroll data.
+
+```{r display_data, warning=FALSE, message=FALSE, echo=FALSE}
+
+#loading package
+library(DT)
+
+#displaying datatable
+datatable(wages_simple)
+```
+
+
